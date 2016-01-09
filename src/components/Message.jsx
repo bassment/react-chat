@@ -1,19 +1,18 @@
 import React from 'react';
-import mui from 'material-ui';
-
-var {ListItem, Avatar} = mui;
+import { ListItem, Avatar } from 'material-ui';
 
 class Message extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <ListItem
         leftAvatar={<Avatar
-          src="http://icons.iconarchive.com/icons/hopstarter/halloween-avatars/64/Frankenstein-icon.png" />}>
-        {this.props.message}
+          src={this.props.message.profilePic} />
+      }>
+        {this.props.message.message}
       </ListItem>
     );
   }

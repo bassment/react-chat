@@ -1,63 +1,52 @@
 import React from 'react';
 import Message from './Message.jsx';
-import Radium from 'radium';
-import mui from 'material-ui';
-import _ from 'lodash';
 import Firebase from 'firebase';
+import _ from 'lodash';
+import connectToStores from 'alt/utils/connectToStores';
+import ChatStore from '../stores/ChatStore';
 
-var {Card, List} = mui;
+import { Card, List, CircularProgress } from 'material-ui';
 
-@Radium
+@connectToStores
 class MessageList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      messages: {}
-    };
+  }
 
-    this.firebaseRef = new Firebase('https://react-chat-app.firebaseio.com/messages');
-    this.firebaseRef.on("child_added", (msg) => {
-      if (this.state.messages[msg.key()]) {
-        return;
-      }
+  static getStores() {
+    return [ChatStore];
+  }
 
-      let msgVal = msg.val();
-      msgVal.key = msg.key();
-      this.state.messages[msgVal.key] = msgVal;
-      this.setState({
-        messages: this.state.messages
-      });
-    });
-    this.firebaseRef.on("child_removed", (msg) =>{
-      let msgKey = msg.key();
-      delete this.state.messages[msgKey];
-      this.setState({
-        messages: this.state.messages
-      });
-    });
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   render() {
-    var messageNodes = _.values(this.state.messages).map((message, i) => {
-      return (
-        <Message key={i}  message={message.message} />
-      );
-    });
+    let messageNodes = null;
+
+    if (!this.props.messagesLoading) {
+      messageNodes = _.values(this.props.messages).map((message, index) => {
+        return (
+          <Message key={index} message={message} />
+        );
+      });
+    } else {
+      messageNodes = <CircularProgress mode="indeterminate"
+        style={{
+          paddingTop: '20px',
+          paddingBottom: '20px',
+          margin: '0 auto',
+          display: 'block',
+          width: '60px',
+        }} />;
+    }
 
     return (
-      <Card style={{flexGrow: 2, marginLeft: 30}}>
-        <List><div style={styles.messages}>{messageNodes}</div></List>
+      <Card style={{ flexGrow: 2, marginLeft: 30 }}>
+        <List>{messageNodes}</List>
       </Card>
     );
   }
 }
-
-var styles = {
-  messages: {
-    ':hover': {
-      color: "green"
-    },
-  }
-};
 
 export default MessageList;

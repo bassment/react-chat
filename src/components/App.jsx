@@ -1,7 +1,7 @@
 import React from 'react';
 import mui from 'material-ui';
 import MessageList from './MessageList.jsx';
-import ChanelList from './ChanelList.jsx';
+import ChannelList from './ChannelList.jsx';
 import MessageBox from './MessageBox.jsx';
 import Login from './Login.jsx';
 import connectToStores from 'alt/utils/connectToStores';
@@ -21,7 +21,7 @@ class App extends React.Component {
     super();
   }
 
-  static getStores(){
+  static getStores() {
     return [ChatStore];
   }
 
@@ -30,7 +30,6 @@ class App extends React.Component {
   }
 
   render() {
-
     var Chat = (
     <div>
       <div style={{
@@ -38,15 +37,15 @@ class App extends React.Component {
         flexFlow: 'row wrap',
         maxWidth: 1200,
         width: '100%',
-        margin: '30px auto 30px'
+        margin: '30px auto 30px',
       }}>
-        <ChanelList />
+        <ChannelList />
         <MessageList />
       </div>
       <MessageBox />
-    </div> );
+    </div>);
 
-    return(
+    return (
       <div>
         <AppBar title="ChatApp" />
         {this.props.user ? Chat : <Login />}

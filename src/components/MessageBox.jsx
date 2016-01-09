@@ -1,26 +1,25 @@
 import React from 'react';
-import mui from 'material-ui';
 import trim from 'trim';
-import Firebase from 'firebase';
+import Actions from '../actions';
 
-var {Card} = mui;
+import { Card } from 'material-ui';
 
 class MessageBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
     };
 
     this.firebaseRef = new Firebase('https://react-chat-app.firebaseio.com/messages');
   }
 
-  render () {
+  render() {
     return (
       <Card style={{
           maxWidth: 1200,
           margin: '30px auto',
-          padding: 30
+          padding: 30,
         }}>
         <textarea
           value={this.state.message }
@@ -34,7 +33,7 @@ class MessageBox extends React.Component {
             marginHeight: 50,
             color: '#555',
             fontSize: 14,
-            outline: 'auto 0px'
+            outline: 'auto 0px',
           }} />
       </Card>
     );
@@ -42,18 +41,18 @@ class MessageBox extends React.Component {
 
   _handleInputChange(e) {
     this.setState({
-      message: e.target.value
+      message: e.target.value,
     });
   }
 
   _handleEnterPress(e) {
     if (e.keyCode === 13 && trim(e.target.value) !== '') {
       e.preventDefault();
-      this.firebaseRef.push({
-        message: this.state.message
-      });
+
+      Actions.sendMessage(this.state.message);
+
       this.setState({
-        message: ''
+        message: '',
       });
 
       console.log('Sent a new message: ', e.target.value);
