@@ -17,13 +17,15 @@ class Actions {
     );
   }
 
-  login(args) {
+  login(history) {
     return (dispatch) => {
       this.firebaseRef = new Firebase('https://react-chat-app.firebaseio.com');
       this.firebaseRef.authWithOAuthPopup('google', (error, user) => {
         if (error) { return; }
 
         dispatch(user);
+
+        history.pushState(null, '/chat');
       });
     };
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Actions from '../actions';
 
 import { Card, CardText, RaisedButton } from 'material-ui';
@@ -6,7 +6,7 @@ import { Card, CardText, RaisedButton } from 'material-ui';
 export default class Login extends React.Component {
 
   onClick() {
-    Actions.login();
+    Actions.login(this.props.history);
   }
 
   render() {
