@@ -16,7 +16,7 @@ const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Chat} />
     <Route path="chat" component={Chat} onEnter={requireAuth}>
-      <Route path="chat/:channel" component={Chat} />
+      <Route path=":channel" component={Chat} />
     </Route>
     <Route path="login" component={Login} />
   </Route>

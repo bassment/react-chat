@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { ListItem } from 'material-ui';
 import Actions from '../actions';
 
@@ -15,15 +16,15 @@ class Channel extends React.Component {
     let styles = {};
 
     if (this.props.channel.selected) {
-      styles.backgroundColor = '#f0f0f0';
+      styles.backgroundColor = '#b2ebf2';
     }
 
     return (
-      <ListItem
-        style={styles}
-        onClick={this.onClick.bind(this)}>
-        {this.props.channel.name}
-      </ListItem>
+      <Link to={'/chat/' + this.props.channel.key}>
+        <ListItem style={styles}>
+          {this.props.channel.name}
+        </ListItem>
+      </Link>
     );
   }
 }
