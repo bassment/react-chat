@@ -1,0 +1,9 @@
+{
+  "firebase": "react-chat-app",
+  "public": "/",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

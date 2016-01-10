@@ -14,7 +14,7 @@ function requireAuth(nextState, replace) {
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={Chat} />
+    <IndexRoute component={Login} />
     <Route path="chat" component={Chat} onEnter={requireAuth}>
       <Route path=":channel" component={Chat} />
     </Route>
