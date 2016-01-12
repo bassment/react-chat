@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import createHashHistory from 'history/lib/createHashHistory';
 import routes from './routes/index.jsx';
 
 ReactDOM.render(<Router
     children={routes}
-    history={createBrowserHistory({ queryKey: false })}/>,
+    history={createHashHistory({ queryKey: false })}/>,
   document.getElementById('container'));
