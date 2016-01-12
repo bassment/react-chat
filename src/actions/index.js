@@ -29,6 +29,14 @@ class Actions {
       });
     };
   }
+
+  logout(history) {
+    return (dispatch) => {
+      dispatch();
+
+      history.pushState(null, '/login');
+    };
+  }
 }
 
 export default alt.createActions(Actions);
