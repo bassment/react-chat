@@ -10,7 +10,7 @@ import _ from 'lodash';
 class ChatStore {
   constructor() {
     this.state = {
-      user: localStorage.getItem('user') || null,
+      user: sessionStorage.getItem('user') || null,
       messages: null,
       messagesLoading: true,
     };
@@ -100,7 +100,7 @@ class ChatStore {
 
   @bind(Actions.login)
   login(user) {
-    localStorage.setItem('user', user);
+    sessionStorage.setItem('user', user);
     this.setState({
       user: user,
     });
@@ -108,7 +108,7 @@ class ChatStore {
 
   @bind(Actions.logout)
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.setState({
       user: null,
     });
